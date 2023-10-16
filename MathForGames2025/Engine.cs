@@ -47,7 +47,7 @@ namespace MathForGames2025
             {
                 for(int x = 0; x < _buffer.GetLength(1); x++)
                 {
-                    Console.Write(_buffer[y, x]);
+                    Console.Write(_buffer[y, x].Symbol);
                 }
             }
         }
