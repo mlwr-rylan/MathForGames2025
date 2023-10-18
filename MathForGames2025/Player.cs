@@ -26,21 +26,21 @@ namespace MathForGames2025
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
             {
-                Position += new Vector2(0, -1) * deltaTime;
+                Position += new Vector2(0, -50) * deltaTime;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
-                Position += new Vector2(-1, 0) * deltaTime;
+                Position += new Vector2(-50, 0) * deltaTime;
 
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
             {
-                Position += new Vector2(0, 1)* deltaTime;
+                Position += new Vector2(0, 50)* deltaTime;
 
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
-                Position += new Vector2(1, 0) * deltaTime;
+                Position += new Vector2(50, 0) * deltaTime;
             }
 
             

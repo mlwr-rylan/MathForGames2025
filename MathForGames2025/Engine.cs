@@ -27,6 +27,7 @@ namespace MathForGames2025
         private void Start()
         {
             Raylib.InitWindow(_screenWidth, _screenHeight, "MathForGames" );
+            Raylib.SetTargetFPS(120);
             _stopwatch.Start();
             _testScene = new TestScene();
             _buffer = new Icon[10, 10];
@@ -72,7 +73,8 @@ namespace MathForGames2025
             float deltaTime = 0;
             while (!_applicationShouldClose && !Raylib.WindowShouldClose())
             {
-                currentTime = _stopwatch.ElapsedMilliseconds / 1000;
+                currentTime = _stopwatch.ElapsedMilliseconds / 1000.0f;
+                Console.WriteLine(currentTime);
                 deltaTime = currentTime - lastTime;
                 Draw();
                 Update(deltaTime);
