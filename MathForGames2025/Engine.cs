@@ -1,4 +1,5 @@
 ﻿using System;
+using Raylib_cs;
 using System.Collections.Generic;
 using System.Linq;
 using MathLibrary;
@@ -15,58 +16,48 @@ namespace MathForGames2025
 
     internal class Engine
     {
+        private const int _screenWidth = 800;
+        private const int _screenHeight = 450;
         private static bool _applicationShouldClose;
-        private static char[,] _buffer;
+        private static Icon[,] _buffer;
         private TestScene _testScene;
 
-        public static void Render(char icon, Vector2 position)
-        {
-            if(position.Y >= _buffer.GetLength(0) || position.Y < 0)
-            {
-                return;
-            }
-            else if (position.X >= _buffer.GetLength(0) || position.X < 0)
-            {
-                return;
-            }
-                _buffer[(int)position.Y, (int)position.X] = icon;
-        }
+
         private void Start()
         {
+            Raylib.InitWindow(_screenWidth, _screenHeight, "MathForGames" );
             _testScene = new TestScene();
-            _buffer = new char[10, 10];
+            _buffer = new Icon[10, 10];
             _testScene.Start();
         }
+        public static void Render(Icon icon, Vector2 position)
+        {
+            Raylib.DrawText(icon.Symbol,  (int)position.X, (int)position.Y, 50,  icon.IconColor);
 
+        }
         private void Draw()
         {
-            Console.Clear();
-            _buffer = new char[10, 10];
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Color.BLACK);
+
             _testScene.Draw();
-            for(int y = 0; y < _buffer.GetLength(0); y++)
-            {
-                for(int x = 0; x < _buffer.GetLength(1); x++)
-                {
-                    Console.Write(_buffer[y, x].Symbol);
-                }
-            }
+
+            Raylib.EndDrawing();
         }
 
         private void Update()
         {
+           
             _testScene.Update();
-
+            
         }
 
         private void End()
         {
             _testScene.End();
+            Raylib.CloseWindow();
         }
-        public static char GetInput()
-        {
-            return Console.ReadKey(true).KeyChar;
-
-        }
+        
         public static void EndApplication()
         {
             _applicationShouldClose = true;
@@ -76,7 +67,7 @@ namespace MathForGames2025
         {
             Start();
 
-            while (!_applicationShouldClose)
+            while (!_applicationShouldClose && !Raylib.WindowShouldClose())
             {
                 Draw();
                 Update();

@@ -1,4 +1,5 @@
 ﻿using MathLibrary;
+using Raylib_cs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace MathForGames2025
         {
             base.Start();
             Vector2 startPosition = new Vector2(6, 0);
-            _testActor = new Actor('@', startPosition);
+            Icon playerIcon = new Icon { IconColor = Color.BLUE, Symbol = "OD" };
+            _testActor = new Player(playerIcon, startPosition);
 
             _testActor.Start();
         }
@@ -26,7 +28,6 @@ namespace MathForGames2025
         }
         public override void Update()
         {
-            base.Update();
             _testActor.Update();
         }
 
