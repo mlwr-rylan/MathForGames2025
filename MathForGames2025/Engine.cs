@@ -5,6 +5,7 @@ using System.Linq;
 using MathLibrary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MathForGames2025
 {
@@ -21,11 +22,12 @@ namespace MathForGames2025
         private static bool _applicationShouldClose;
         private static Icon[,] _buffer;
         private TestScene _testScene;
-
+        private Stopwatch _stopwatch = new Stopwatch();
 
         private void Start()
         {
             Raylib.InitWindow(_screenWidth, _screenHeight, "MathForGames" );
+            _stopwatch.Start();
             _testScene = new TestScene();
             _buffer = new Icon[10, 10];
             _testScene.Start();
@@ -45,10 +47,9 @@ namespace MathForGames2025
             Raylib.EndDrawing();
         }
 
-        private void Update()
+        private void Update(float deltaTime)
         {
-           
-            _testScene.Update();
+            _testScene.Update(deltaTime);
             
         }
 
@@ -66,11 +67,16 @@ namespace MathForGames2025
         public void Run()
         {
             Start();
-
+            float currentTime = 0;
+            float lastTime = 0;
+            float deltaTime = 0;
             while (!_applicationShouldClose && !Raylib.WindowShouldClose())
             {
+                currentTime = _stopwatch.ElapsedMilliseconds / 1000;
+                deltaTime = currentTime - lastTime;
                 Draw();
-                Update();
+                Update(deltaTime);
+                lastTime = currentTime;
             }
 
             End();

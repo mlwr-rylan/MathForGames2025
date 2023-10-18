@@ -15,32 +15,32 @@ namespace MathForGames2025
         //char input = Console.ReadKey(true).KeyChar;
         
             
-        public override void Update()
+        public override void Update(float deltaTime)
         {
-            PlayerMovementorSomeShit();
+            PlayerMovementorSomeShit(deltaTime);
            
         }
         public Player(Icon icon, Vector2 position):base (icon, position){}
-        public void PlayerMovementorSomeShit()
+        public void PlayerMovementorSomeShit(float deltaTime)
         {
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
             {
-                Position += new Vector2(0, -1);
+                Position += new Vector2(0, -1) * deltaTime;
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
-                Position += new Vector2(-1, 0);
+                Position += new Vector2(-1, 0) * deltaTime;
 
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
             {
-                Position += new Vector2(0, 1);
+                Position += new Vector2(0, 1)* deltaTime;
 
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
-                Position += new Vector2(1, 0);
+                Position += new Vector2(1, 0) * deltaTime;
             }
 
             

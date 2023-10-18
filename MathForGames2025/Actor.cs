@@ -51,7 +51,7 @@ namespace MathForGames2025
 
         }
 
-        public virtual void Update()
+        public virtual void Update(float deltaTime)
         {
             
             Vector2 velocity = new Vector2(1, 0);

@@ -26,9 +26,10 @@ namespace MathForGames2025
             base.Draw();
             _testActor.Draw();
         }
-        public override void Update()
+        public override void Update(float deltaTime)
         {
-            _testActor.Update();
+            base.Update( deltaTime);
+            _testActor.Update(deltaTime);
         }
 
     }
