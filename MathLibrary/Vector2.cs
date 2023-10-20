@@ -22,6 +22,24 @@ namespace MathLibrary
             _x = x;
             _y = y;
         }
+        public float GetMagnitude(float a, float b)
+        {
+            return MathF.Sqrt(a * a * b * b);
+        }
+
+        // makes vectors length one
+        
+        public void Normalize()
+        {
+            
+            // velocity.Normalize() - will change velocity to be a unit vector.
+            // velocity.GetNormalized() - will return a new normalized vector without changing velocity.
+        }
+        //divide the vector by its magnitude to get a value of 1
+        public Vector2 GetNormalized()
+        {
+
+        }
         public static Vector2 operator + (Vector2 lhs, Vector2 rhs)
         {
             return new Vector2(lhs.X + rhs.X, lhs.Y + rhs.Y);
