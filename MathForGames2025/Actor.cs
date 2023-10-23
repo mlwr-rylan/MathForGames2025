@@ -13,7 +13,7 @@ namespace MathForGames2025
 
         private string _symbol;
         private Color _color;
-
+        private Vector2 _facing;
 
         public string Symbol
         {

@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Drawing;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MathLibrary
 {
@@ -22,23 +24,44 @@ namespace MathLibrary
             _x = x;
             _y = y;
         }
-        public float GetMagnitude(float a, float b)
+        public float GetMagnitude()
         {
-            return MathF.Sqrt(a * a * b * b);
+           
+            return (float) MathF.Sqrt(X * X + Y * Y);
         }
-
+        public static float DotProduct(Vector2 a, Vector b)
+        {
+           return a.X * b.X + a.Y + b.Y;
+        }
         // makes vectors length one
         
         public void Normalize()
         {
             
+            float magnitude = GetMagnitude();
+            
+            if(magnitude == 0)
+            {
+                return;
+            }
+            X /= magnitude;
+            Y /= magnitude;
             // velocity.Normalize() - will change velocity to be a unit vector.
             // velocity.GetNormalized() - will return a new normalized vector without changing velocity.
         }
         //divide the vector by its magnitude to get a value of 1
         public Vector2 GetNormalized()
         {
+            float magnitude = GetMagnitude();
 
+            if (magnitude == 0)
+            {
+                return new Vector2();
+            }
+            return new Vector2(X / magnitude, Y / magnitude);
+            
+
+           
         }
         public static Vector2 operator + (Vector2 lhs, Vector2 rhs)
         {
@@ -56,6 +79,7 @@ namespace MathLibrary
         {
             return new Vector2(lhs.X / rhs.X, lhs.Y / rhs.Y);
         }
+        
         
         
     }
