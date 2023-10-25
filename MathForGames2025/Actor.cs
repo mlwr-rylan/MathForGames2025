@@ -13,7 +13,7 @@ namespace MathForGames2025
 
         private string _symbol;
         private Color _color;
-        private Vector2 _facing;
+
 
         public string Symbol
         {
@@ -31,8 +31,7 @@ namespace MathForGames2025
     {
         private Icon _icon;
         private Vector2 _position;
-
-        
+        private Vector2 _facing = new Vector2(1,0);
 
         public Actor(Icon icon, Vector2 position)
         {
@@ -45,7 +44,16 @@ namespace MathForGames2025
             get { return _position; }
             set { _position = value; }
         }
-
+        public Vector2 Facing
+        {
+            get { return _facing; }
+            set { _facing = value;}
+        }
+        public Icon ActorIcon
+        {
+            get { return _icon; }
+            set { _icon = value; }
+        }
         public virtual void Start()
         {
 

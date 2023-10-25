@@ -23,7 +23,7 @@ namespace MathForGames2025
         private static Icon[,] _buffer;
         private TestScene _testScene;
         private Stopwatch _stopwatch = new Stopwatch();
-
+        
         private void Start()
         {
             Raylib.InitWindow(_screenWidth, _screenHeight, "MathForGames" );
@@ -38,6 +38,7 @@ namespace MathForGames2025
             Raylib.DrawText(icon.Symbol,  (int)position.X, (int)position.Y, 50,  icon.IconColor);
 
         }
+        
         private void Draw()
         {
             Raylib.BeginDrawing();

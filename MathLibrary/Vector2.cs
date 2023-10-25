@@ -29,12 +29,15 @@ namespace MathLibrary
            
             return (float) MathF.Sqrt(X * X + Y * Y);
         }
-        public static float DotProduct(Vector2 a, Vector b)
+        public static float DotProduct(Vector2 a, Vector2 b)
         {
-           return a.X * b.X + a.Y + b.Y;
+            return (float)a.X * b.X + a.Y * b.Y;
+        }
+        public static float GetDistance(Vector2 a, Vector2 b)
+        {
+            return (a - b).GetMagnitude();
         }
         // makes vectors length one
-        
         public void Normalize()
         {
             
