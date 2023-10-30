@@ -10,6 +10,7 @@ namespace MathForGames2025
 {
     internal class Character : Actor
     {
+
         private Vector2 _velocity;
         public Vector2 Velocity
         {

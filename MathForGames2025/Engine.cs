@@ -14,16 +14,16 @@ namespace MathForGames2025
         public static int ClassRoomNumber;
         public string Name;
     }
-
+   
     internal class Engine
     {
         private const int _screenWidth = 800;
         private const int _screenHeight = 450;
         private static bool _applicationShouldClose;
         private static Icon[,] _buffer;
-        private TestScene _testScene;
+        private static Scene _testScene;
         private Stopwatch _stopwatch = new Stopwatch();
-        
+     
         private void Start()
         {
             Raylib.InitWindow(_screenWidth, _screenHeight, "MathForGames" );
@@ -32,6 +32,10 @@ namespace MathForGames2025
             _testScene = new TestScene();
             _buffer = new Icon[10, 10];
             _testScene.Start();
+        }
+        public static Scene GetCurrentScene()
+        {
+            return currentScene;
         }
         public static void Render(Icon icon, Vector2 position)
         {

@@ -39,6 +39,7 @@ namespace MathForGames2025
             _position = position;
 
         }
+
         public Vector2 Position
         {
             get { return _position; }

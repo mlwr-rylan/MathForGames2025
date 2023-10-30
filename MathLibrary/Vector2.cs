@@ -37,6 +37,7 @@ namespace MathLibrary
         {
             return (a - b).GetMagnitude();
         }
+ 
         // makes vectors length one
         public void Normalize()
         {
