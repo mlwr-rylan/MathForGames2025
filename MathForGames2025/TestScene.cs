@@ -28,8 +28,8 @@ namespace MathForGames2025
             
             _testActor = new Player(playerIcon, startPosition);
             _testEnemy = new Enemy(_testActor, enemyIcon, startPosition);
-            
 
+            Actor spaceship = new Actor("Images/player.png", startPosition); 
 
             AddActor(_testActor);
             AddActor (_testEnemy);

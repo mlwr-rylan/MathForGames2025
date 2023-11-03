@@ -25,6 +25,7 @@ namespace MathForGames2025
             _colliderId = colliderId;
             _owner = owner;
         }
+        public Actor
         public bool CheckCollison(Collider collider)
         {
             if (collider.ColliderId == 0)
