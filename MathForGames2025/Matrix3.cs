@@ -32,8 +32,38 @@ namespace MathForGames2025
         {
             get
             {
-                return new Matrix3 ;
+                return new Matrix3(
+                1.0f, 0.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
+                0.0f, 0.0f, 1.0f);
             }
+        }
+        public static Matrix3 CreateRotation(float radians)
+        {
+            float cos = (float)Math.Cos(radians);
+            float sin = (float)Math.Sin(radians);
+
+            return new Matrix3(
+                cos, -sin, 0.0f,
+                sin, cos, 0.0f,
+                0.0f, 0.0f, 1.0f
+            );
+        }
+        public static Matrix3 CreateTranslation(float x, float y)
+        {
+            return new Matrix3(
+                1.0f, 0.0f, x,
+                0.0f, 1.0f, y,
+                0.0f, 0.0f, 1.0f
+            );
+        }
+        public static Matrix3 CreateScale(float x, float y)
+        {
+            return new Matrix3(
+                x, 0.0f, 0.0f,
+                0.0f, y, 0.0f,
+                0.0f, 0.0f, 1.0f
+            );
         }
 
         public static Matrix3 operator +(Matrix3 a, Matrix3 b)
@@ -64,9 +94,10 @@ namespace MathForGames2025
                 (a.M20 * b.M02) + (a.M21 * b.M12) + (a.M22 * b.M22)
             );
         }
-        public static Matrix3 operator /(Matrix3 a, Matrix3 b)
-        {
 
-        }
+        //public static Matrix3 operator /(Matrix3 a, Matrix3 b)
+        //{
+
+        //}
     }
 }

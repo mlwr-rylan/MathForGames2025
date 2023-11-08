@@ -30,44 +30,33 @@ namespace MathForGames2025
     internal class Actor
     {
         private Icon _icon;
-        private SpriteCranberry _sprite;
+        private Sprite _sprite;
         private Actor _parent;
 
-        private Matrix3 _globalTransforms = Matrix3.Identity;
+        
         private Matrix3 _translation = Matrix3.Identity;
         private Matrix3 _rotation = Matrix3.Identity;
         private Matrix3 _scale = Matrix3.Identity;
+        private Matrix3 _localTransform = Matrix3.Identity;
         private Matrix3 _globalTransform = Matrix3.Identity;
         private Collider _collider;
         private bool _started;
         public Actor(Icon icon, Vector2 position)
         {
             _icon = icon;
-            Position = position;
+            LocalPosition = position;
 
         }
-        public Vector2 Scale
+        /// <param name="spritePath">The path the sprite will be at in the build. Ex: "Images/player.png"</param>
+        /// <param name="position">The position of the sprite on the screen.</param>
+        public Actor(string spritePath, Vector2 position)
         {
-            get
-            {
-                float xAxisScale = new Vector2(_globalTransform.M00, _globalTransform.M01).GetMagnitude();
-                float yAxisScale = new Vector2(_globalTransform.M01, _globalTransform.M11).GetMagnitude();
-
-                return new Vector2(xAxisScale, yAxisScale);
-
-            }
-            set
-            {
-                Vector2 xAxis = new Vector2(_globalTransform.M00, _globalTransform.M01).GetNormalized();
-                Vector2 yAxis = new Vector2(_globalTransform.M01, _globalTransform.M11).GetNormalized();
-
-                _globalTransform.M00 = xAxis.X;
-                _globalTransform.M00 = yAxis.Y;
-            }
+            _sprite = new Sprite(spritePath);
+            LocalPosition = position;
         }
-        
 
-        public Vector2 Position
+
+        public Vector2 WorldPosition
         {
             get { return new Vector2(_globalTransform.M02, _globalTransform.M12); }
             set
@@ -77,6 +66,28 @@ namespace MathForGames2025
             }
             
              
+        }
+
+        public Vector2 LocalPosition
+        {
+            get { return new Vector2(_translation.M02, _translation.M12); }
+            set
+            {
+                _globalTransform.M02 = value.X;
+                _globalTransform.M12 = value.Y;
+            }
+
+
+        }
+        public Matrix3 LocalTransforms
+        {
+            get { return _localTransform;  }
+            set { _localTransform = value; }
+        }   
+        public Matrix3 GlobalTransforms
+        {
+            get { return _globalTransform; }
+            set { _globalTransform = value; }
         }
         public Vector2 Facing
         {
@@ -120,18 +131,13 @@ namespace MathForGames2025
         {
             get { return _started;  }
         }
-        public Actor(s)
-        /// <param name="spritePath">The path the sprite will be at in the build. Ex: "Images/player.png"</param>
-        /// <param name="position">The position of the sprite on the screen.</param>
-        public Actor(string spritePath, Vector2 position)
-        {
-            _sprite = new SpriteCranberry(spritePath);
-            Position = position;
-        }
 
+
+
+      
         public bool CheckCollision(Actor other)
         {
-            return AttachedCollider.CheckCollision(other.AttachedCollider);
+            return AttachedCollider.CheckCollison(other.AttachedCollider);
         }
 
         public virtual void OnCollision(Actor other)
@@ -141,27 +147,32 @@ namespace MathForGames2025
 
         public virtual void Start()
         {
-            UpdateTransforms();
+            _started = true;
         }
 
         public virtual void Update(float deltaTime)
         {
-            
-            Vector2 velocity = new Vector2(1, 0);
-            Position = position + velocity;
+
+            UpdateTransforms();
         }
 
         public virtual void Draw()
         {
-            Engine.Render(_icon, Position);
+            Engine.Render(_icon, LocalPosition);
+            
             if (AttachedCollider != null)
                 AttachedCollider.Draw();
+            if(_sprite != null)
+            {
+                _sprite.Draw(GlobalTransforms);
+            }
         }
 
         public virtual void End()
         {
 
         }
+        
         public void Translate(float x, float y)
         {
             _translation *= Matrix3.CreateTranslation(x, y);
@@ -187,7 +198,12 @@ namespace MathForGames2025
         }
         private void UpdateTransforms()
         {
-            _globalTransform = _translation * _rotation * _scale;
+           _localTransform =  _translation * _rotation * _scale;
+        }
+        public Actor Parent
+        {
+            get { return _parent;  }
+            set { _parent = value; }
         }
     }
 }

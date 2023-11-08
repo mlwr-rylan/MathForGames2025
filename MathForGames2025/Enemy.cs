@@ -15,7 +15,7 @@ namespace MathForGames2025
         private float _distance;
         private float _angle;
         private Character _target;
-        //private Enemy _target2;
+        
         public Enemy(Character target, Icon icon, Vector2 position) : base( icon, position)
         {
             _target = target;
@@ -26,11 +26,11 @@ namespace MathForGames2025
             _distance = distance;
             _angle = angle;
         }
-
+        //detection 
         public override void Update(float deltaTime)
         {
             //vector from enenmy to target.
-            Vector2 enemyToTarget = _target.Position - Position;
+            Vector2 enemyToTarget = _target.LocalPosition - LocalPosition;
 
             // normalize the vector
             Vector2 direction = enemyToTarget.GetNormalized();
@@ -49,16 +49,16 @@ namespace MathForGames2025
             {
                 return;
             }
-            Facing = Velocity;
+
             newIcon.IconColor = Color.RED;
             ActorIcon = newIcon;
             base.Update(deltaTime);
         }
         public override void Draw()
         {
-            Vector2 endPosition = Position + (Facing * 3);
+            Vector2 endPosition = LocalPosition + (Facing * 3);
 
-            Raylib.DrawLine((int)Position.X, (int)Position.Y, (int)endPosition.X, (int)endPosition.Y, ActorIcon.IconColor);
+            Raylib.DrawLine((int)LocalPosition.X, (int)LocalPosition.Y, (int)endPosition.X, (int)endPosition.Y, ActorIcon.IconColor);
             base.Draw();
         }
     }

@@ -22,35 +22,37 @@ namespace MathForGames2025
             
         public override void Update(float deltaTime)
         {
-            PlayerMovementorSomeShit(deltaTime);
+            PlayerMovement(deltaTime);
            
         }
         public Player(Icon icon, Vector2 position):base (icon, position){}
-        public void PlayerMovementorSomeShit(float deltaTime)
+
+        public Player(string spritePath, Vector2 position) : base(spritePath, position) { }
+        public void PlayerMovement(float deltaTime)
         {
             Vector2 direction = new Vector2();
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
             {
-                Position += new Vector2(0, -5);
+                LocalPosition += new Vector2(0, -5);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
-                Position += new Vector2(-5, 0);
+                LocalPosition += new Vector2(-5, 0);
 
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
             {
-                Position += new Vector2(0, 5);
+                LocalPosition += new Vector2(0, 5);
 
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
-                Position += new Vector2(5, 0);
+                LocalPosition += new Vector2(5, 0);
             }
 
             Velocity = direction.GetNormalized() * _Speed;
-            Position += Velocity * deltaTime;
+            LocalPosition += Velocity * deltaTime;
             Velocity = direction * _Speed;
         }
 

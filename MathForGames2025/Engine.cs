@@ -37,7 +37,7 @@ namespace MathForGames2025
         }
         public static Scene GetCurrentScene()
         {
-            return currentScene;
+            return _currentScene;
         }
         public static void Render(Icon icon, Vector2 position)
         {

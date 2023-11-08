@@ -8,8 +8,6 @@ using MathLibrary;
 
 namespace MathForGames2025
 {
-    internal class SpriteCranberry
-    {
         class Sprite
         {
             private Texture2D _texture;
@@ -81,5 +79,12 @@ namespace MathForGames2025
                 //Find the transform rotation in radians 
                 float rotation = (float)Math.Atan2(transform.M10, transform.M00);
 
+                //Draw the sprite
+                Raylib.DrawTextureEx(_texture, pos,
+                    (float)(rotation * 180.0f / Math.PI), 1, Color.WHITE);
+
             }
         }
+    
+}
+

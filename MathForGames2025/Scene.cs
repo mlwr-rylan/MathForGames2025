@@ -14,9 +14,10 @@
 
             for(int i = 0; i< _actors.Length; i++)
             {
-                temp[1] = _actors[1];
+                temp[i] = _actors[i];
             }
                 temp[_actors.Length] = actor;
+            _actors = temp;
         }
         public bool Remove(Actor actorToRemove)
         {
@@ -34,6 +35,8 @@
 
             bool actorRemoved = true;
 
+            int j = 0;
+
             for (int i = 0; i < _actors.Length; i++)
             {
 
@@ -42,7 +45,8 @@
                     actorRemoved = true;
                     continue;
                 }
-                temp 
+                temp[j] = _actors[i];
+                j++;
             }
             return actorRemoved;
         }
