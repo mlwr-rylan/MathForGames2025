@@ -19,9 +19,11 @@ namespace MathForGames2025
     {
         private const int _screenWidth = 800;
         private const int _screenHeight = 450;
+
         private static bool _applicationShouldClose;
         private static Icon[,] _buffer;
-        private static Scene _testScene;
+        private static Scene _currentScene;
+
         private Stopwatch _stopwatch = new Stopwatch();
      
         private void Start()
@@ -29,9 +31,9 @@ namespace MathForGames2025
             Raylib.InitWindow(_screenWidth, _screenHeight, "MathForGames" );
             Raylib.SetTargetFPS(120);
             _stopwatch.Start();
-            _testScene = new TestScene();
+            _currentScene = new TestScene();
             _buffer = new Icon[10, 10];
-            _testScene.Start();
+            _currentScene.Start();
         }
         public static Scene GetCurrentScene()
         {
@@ -48,20 +50,20 @@ namespace MathForGames2025
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.BLACK);
 
-            _testScene.Draw();
+            _currentScene.Draw();
 
             Raylib.EndDrawing();
         }
 
         private void Update(float deltaTime)
         {
-            _testScene.Update(deltaTime);
+            _currentScene.Update(deltaTime);
             
         }
 
         private void End()
         {
-            _testScene.End();
+            _currentScene.End();
             Raylib.CloseWindow();
         }
         

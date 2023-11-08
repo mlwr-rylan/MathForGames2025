@@ -7,7 +7,7 @@ using Raylib_cs;
 
 namespace MathForGames2025
 {
-    internal struct Matrix3
+    public struct Matrix3
     {
         public float M00, M01, M02,
                      M10, M11, M12,
@@ -32,7 +32,7 @@ namespace MathForGames2025
         {
             get
             {
-                return new Matrix3 
+                return new Matrix3 ;
             }
         }
 
