@@ -14,7 +14,8 @@ namespace MathForGames2025
         //private Enemy _testEnemy2;
         private Enemy _testEnemy;
         private Player _testActor;
-     
+        private Actor _spaceship;
+
         public override void Start()
         {
             base.Start();
@@ -35,7 +36,7 @@ namespace MathForGames2025
             
 
             AddActor(_testActor);
-            AddActor (spaceship);
+            AddActor (_spaceship);
             
         }
 
