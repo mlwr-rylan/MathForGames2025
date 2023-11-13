@@ -35,7 +35,7 @@ namespace MathForGames2025
             
 
             AddActor(_testActor);
-            AddActor (_testEnemy);
+            AddActor (spaceship);
             
         }
 

@@ -37,9 +37,9 @@ namespace MathLibrary
         {
             return (a - b).GetMagnitude();
         }
- 
+
         // makes vectors length one
-        public void Normalize()
+        public void Normalize(Vector2 direction)
         {
             
             float magnitude = GetMagnitude();
