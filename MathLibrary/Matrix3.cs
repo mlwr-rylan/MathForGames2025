@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Raylib_cs;
+
 
 namespace MathForGames2025
 {
@@ -95,7 +95,7 @@ namespace MathForGames2025
             );
         }
 
-        //public static Matrix3 operator /(Matrix3 a, Matrix3 b)
+        //public static Matrix4 operator /(Matrix4 a, Matrix4 b)
         //{
 
         //}

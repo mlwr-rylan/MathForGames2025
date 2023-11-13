@@ -59,7 +59,7 @@
         {
             for(int i = 0; i < _actors.Length; i++)
             {
-                if (!_actors[1].Started)
+                if (!_actors[i].Started)
                 {
                     _actors[i].Start();
              

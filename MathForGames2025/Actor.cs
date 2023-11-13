@@ -179,22 +179,22 @@ namespace MathForGames2025
         }
         public void Scale(float x, float y)
         {
-
+            _scale *= Matrix3.CreateScale(x, y);
         }
 
         public void SetScale(float x, float y)
         {
-
+            _scale = Matrix3.CreateScale(x, y);
         }
 
         public void Rotate(float radians)
         {
-
+            _rotation *= Matrix3.CreateRotation(radians);
         }
 
         public void SetRotate(float radians)
         {
-
+            _rotation = Matrix3.CreateRotation(radians);
         }
         private void UpdateTransforms()
         {

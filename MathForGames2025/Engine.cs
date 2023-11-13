@@ -28,6 +28,18 @@ namespace MathForGames2025
      
         private void Start()
         {
+            //math test
+            //Matrix4 hey = new Matrix4(1, 0, 5, 3,
+            //                           2, 3, 1, 3,
+            //                           2, 3, 2, 1,
+            //                           2, 6, 4, 3);
+
+            //Matrix4 hey2 = new Matrix4(1, 0, 5, 3,
+            //                           2, 3, 1, 3,
+            //                           2, 3, 2, 1,
+            //                           2, 6, 4, 3);
+            //Matrix4 result = hey * hey2;
+
             Raylib.InitWindow(_screenWidth, _screenHeight, "MathForGames" );
             Raylib.SetTargetFPS(120);
             _stopwatch.Start();
@@ -80,6 +92,8 @@ namespace MathForGames2025
             
             Start();
 
+            
+            
             float currentTime = 0;
             float lastTime = 0;
             float deltaTime = 0;

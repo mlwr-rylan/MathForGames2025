@@ -83,8 +83,10 @@ namespace MathLibrary
         {
             return new Vector2(lhs.X / rhs.X, lhs.Y / rhs.Y);
         }
-        
-        
-        
-    }
+        public static Vector2 operator *(float Scalar, Vector2 lhs)
+        {
+            return new Vector2(lhs.X * Scalar, lhs.Y * Scalar);
+
+
+    }   }    
 }
