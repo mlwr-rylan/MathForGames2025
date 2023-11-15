@@ -13,7 +13,7 @@ namespace MathForGames2025
 {
     internal class Player : Character
     {
-        private float _speed = 50.0f;
+        private float _speed = 100.0f; // Default speed
         private Vector2 Velocity; // Define Velocity as a class member
 
         public Player(Icon icon, Vector2 position) : base(icon, position) { }
@@ -23,6 +23,8 @@ namespace MathForGames2025
         public override void Update(float deltaTime)
         {
             PlayerMovement(deltaTime);
+            // Update the player's position using the velocity
+            LocalPosition += Velocity * deltaTime;
         }
 
         public void PlayerMovement(float deltaTime)
@@ -47,30 +49,18 @@ namespace MathForGames2025
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
             {
-                _speed = 200f;
+                _speed = 200f; // Sprinting speed
             }
             else
             {
-                _speed = 100f;
+                _speed = 100f; // Default speed
             }
+
             // Normalize the direction to ensure consistent speed in all directions
             Velocity = direction.GetNormalized() * _speed;
 
-            if (LocalPosition.X >= 800)
-            {
-                LocalPosition = new Vector2(0, LocalPosition.Y);
-            }
-            if(LocalPosition.Y >= 450)
-            {
-                LocalPosition = new Vector2(LocalPosition.X, 0);
-
-            }
-            // Adjust the speed based on deltaTime
-            float speed = 200.0f; // Adjust the speed as needed
-
-            // Update the player's position using the velocity
-            Velocity = direction * speed;
-            LocalPosition += Velocity * deltaTime;
+            // Wrap the player around the screen instead of resetting position
+            LocalPosition = new Vector2((LocalPosition.X + 800) % 800, (LocalPosition.Y + 450) % 450);
         }
     }
 }

@@ -95,9 +95,6 @@ namespace MathForGames2025
             );
         }
 
-        //public static Matrix4 operator /(Matrix4 a, Matrix4 b)
-        //{
 
-        //}
     }
 }

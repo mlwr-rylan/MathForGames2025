@@ -26,14 +26,14 @@ namespace MathForGames2025
             set { _color = value; }
         }
     }
-    
+
     internal class Actor
     {
         private Icon _icon;
         private Sprite _sprite;
         private Actor _parent;
 
-        
+
         private Matrix3 _translation = Matrix3.Identity;
         private Matrix3 _rotation = Matrix3.Identity;
         private Matrix3 _scale = Matrix3.Identity;
@@ -64,8 +64,8 @@ namespace MathForGames2025
                 _globalTransform.M02 = value.X;
                 _globalTransform.M12 = value.Y;
             }
-            
-             
+
+
         }
 
         public Vector2 LocalPosition
@@ -81,9 +81,9 @@ namespace MathForGames2025
         }
         public Matrix3 LocalTransforms
         {
-            get { return _localTransform;  }
+            get { return _localTransform; }
             set { _localTransform = value; }
-        }   
+        }
         public Matrix3 GlobalTransforms
         {
             get { return _globalTransform; }
@@ -93,7 +93,7 @@ namespace MathForGames2025
         {
             get
             {
-                 return new Vector2(_rotation.M00, _rotation.M10).GetNormalized(); 
+                return new Vector2(_rotation.M00, _rotation.M10).GetNormalized();
             }
         }
         /// <summary>
@@ -120,7 +120,7 @@ namespace MathForGames2025
         }
         public Collider AttachedCollider
         {
-            get { return _collider;  }
+            get { return _collider; }
             set { _collider = value; }
         }
         public Icon GetIcon()
@@ -129,12 +129,12 @@ namespace MathForGames2025
         }
         public bool Started
         {
-            get { return _started;  }
+            get { return _started; }
         }
 
 
 
-      
+
         public bool CheckCollision(Actor other)
         {
             return AttachedCollider.CheckCollison(other.AttachedCollider);
@@ -159,10 +159,10 @@ namespace MathForGames2025
         public virtual void Draw()
         {
             Engine.Render(_icon, LocalPosition);
-            
+
             if (AttachedCollider != null)
                 AttachedCollider.Draw();
-            if(_sprite != null)
+            if (_sprite != null)
             {
                 _sprite.Draw(GlobalTransforms);
             }
@@ -172,7 +172,7 @@ namespace MathForGames2025
         {
 
         }
-        
+
         public void Translate(float x, float y)
         {
             _translation *= Matrix3.CreateTranslation(x, y);
@@ -198,8 +198,18 @@ namespace MathForGames2025
         }
         private void UpdateTransforms()
         {
-           _localTransform =  _translation * _rotation * _scale;
+            _localTransform = _translation * _rotation * _scale;
+
+            if (_parent != null)
+            {
+                _globalTransform = _parent.GlobalTransforms * _localTransform;
+            }
+            else
+            {
+                _globalTransform = _localTransform;
+            }
         }
+
         public Actor Parent
         {
             get { return _parent;  }
@@ -207,3 +217,5 @@ namespace MathForGames2025
         }
     }
 }
+
+

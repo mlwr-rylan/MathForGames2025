@@ -57,16 +57,16 @@
 
         public virtual void Update(float deltaTime)
         {
-            for(int i = 0; i < _actors.Length; i++)
+            for (int i = 0; i < _actors.Length; i++)
             {
                 if (!_actors[i].Started)
                 {
                     _actors[i].Start();
-             
-                }
-                _actors[1].Update(deltaTime);
+                }// Corrected this updates the current actor
+                _actors[i].Update(deltaTime);  
             }
         }
+
 
         public virtual void Draw()
         {
