@@ -9,19 +9,22 @@ using System.Diagnostics;
 
 namespace MathForGames2025
 {
-    class AIEProgrammingStudent
-    {
-        public static int ClassRoomNumber;
-        public string Name;
-    }
-   
+
     internal class Engine
     {
         private const int _screenWidth = 800;
         private const int _screenHeight = 450;
 
+        public static int Width
+        {
+            get { return _screenWidth; }
+        }
+        public static int Height
+        {
+            get { return _screenHeight; }
+        }
         private static bool _applicationShouldClose;
-        private static Icon[,] _buffer;
+
         private static Scene _currentScene;
 
         private Stopwatch _stopwatch = new Stopwatch();
@@ -44,7 +47,7 @@ namespace MathForGames2025
             Raylib.SetTargetFPS(120);
             _stopwatch.Start();
             _currentScene = new TestScene();
-            _buffer = new Icon[10, 10];
+
             _currentScene.Start();
         }
         public static Scene GetCurrentScene()
@@ -83,7 +86,11 @@ namespace MathForGames2025
         {
             _applicationShouldClose = true;
         }
-
+        public static Actor AddActorToScene(Actor actorToSpawn)
+        {
+            _currentScene.AddActor(actorToSpawn);
+            return actorToSpawn;
+        }
         public void Run()
         {
             Vector2 test = new Vector2(8, 5);

@@ -137,6 +137,11 @@ namespace MathForGames2025
 
         public bool CheckCollision(Actor other)
         {
+            if(AttachedCollider == null || other.AttachedCollider == null)
+            {
+                //return a collision that did not happen
+                return false;
+            }
             return AttachedCollider.CheckCollison(other.AttachedCollider);
         }
 
@@ -176,6 +181,10 @@ namespace MathForGames2025
         public void Translate(float x, float y)
         {
             _translation *= Matrix3.CreateTranslation(x, y);
+        }
+        public void SetTranslation(float x, float y)
+        {
+            _translation = Matrix3.CreateTranslation(x, y);
         }
         public void Scale(float x, float y)
         {

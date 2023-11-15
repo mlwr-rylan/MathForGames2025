@@ -15,13 +15,20 @@ namespace MathForGames2025
     {
         private float _speed = 100.0f; // Default speed
         private Vector2 Velocity; // Define Velocity as a class member
-
+        private ProjectileSpawner _spawner;
         public Player(Icon icon, Vector2 position) : base(icon, position) { }
 
-        public Player(string spritePath, Vector2 position) : base(spritePath, position) { }
+        public Player(string spritePath, Vector2 position) : base(spritePath, position)
+        {
+            _spawner = new ProjectileSpawner(this, new Vector2(0, 0), 50, "Images/bullet.png");
+        }
 
         public override void Update(float deltaTime)
         {
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
+            {
+                _spawner 
+            }
             PlayerMovement(deltaTime);
             // Update the player's position using the velocity
             LocalPosition += Velocity * deltaTime;
@@ -60,7 +67,22 @@ namespace MathForGames2025
             Velocity = direction.GetNormalized() * _speed;
 
             // Wrap the player around the screen instead of resetting position
-            LocalPosition = new Vector2((LocalPosition.X + 800) % 800, (LocalPosition.Y + 450) % 450);
+            if (WorldPosition.X > Engine.Width)
+            {
+                SetTranslation(800, WorldPosition.Y);
+            }
+            if (WorldPosition.Y > Engine.Height)
+            {
+                SetTranslation(WorldPosition.X, 0);
+            }
+            if (WorldPosition.X < 0)
+            {
+                SetTranslation(Engine.Width, WorldPosition.Y);
+            }
+            if (WorldPosition.Y < 0)
+            {
+                SetTranslation(WorldPosition.X, Engine.Height);
+            }
         }
     }
 }
