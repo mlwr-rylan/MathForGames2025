@@ -49,7 +49,37 @@ namespace MathLibrary
                 0.0f, 0.0f, 0.0f, 1.0f);
             }
         }
-        public static Matrix4 CreateRotation(float radians)
+        public static Vector4 CrossProduct(Vector4 a, Vector4 b)
+        {
+            float resultX = a.Y * b.Z - a.Z * b.Y;
+            float resultY = a.Z * b.X - a.X * b.Z;
+            float resultZ = a.X * b.Y - a.Y * b.X;
+
+            return new Vector4(resultX, resultY, resultZ);
+        }
+        public static Matrix4 CreateRotationX(float radians)
+        {
+            float cos = (float)Math.Cos(radians);
+            float sin = (float)Math.Sin(radians);
+
+            return new Matrix4(1.0f, 0.0f, 0.0f, 0.0f,
+                               0.0f, cos, -sin, 0.0f,
+                               0.0f, sin, cos, 0.0f,
+                               0.0f, 0.0f, 0.0f, 1.0f);
+        }
+
+        public static Matrix4 CreateRotationY(float radians)
+        {
+            float cos = (float)Math.Cos(radians);
+            float sin = (float)Math.Sin(radians);
+
+            return new Matrix4(cos, 0.0f, sin, 0.0f,
+                               0.0f, 1.0f, 0.0f, 0.0f,
+                               -sin, 0.0f, cos, 0.0f,
+                               0.0f, 0.0f, 0.0f, 1.0f);
+        }
+
+        public static Matrix4 CreateRotationZ(float radians)
         {
             float cos = (float)Math.Cos(radians);
             float sin = (float)Math.Sin(radians);
@@ -126,6 +156,8 @@ namespace MathLibrary
                 a.M30 * b.M03 + a.M31 * b.M13 + a.M32 * b.M23 + a.M33 * b.M33);
             
         }
+
+
         public static Matrix4 operator /(Matrix4 a, Matrix4 b)
         {
             return new Matrix4(
@@ -135,9 +167,21 @@ namespace MathLibrary
                 a.M30 / b.M30, a.M31 / b.M31, a.M32 / b.M32, a.M33 / b.M33);
 
         }
+        
+        public static Matrix4 operator *(Matrix4 a, Vector4 b)
+        {
+            return new Matrix4(
+                a.M00 * b.X + a.M01 * b.Y + a.M02 * b.Z + a.M03 * b.W,
+                a.M10 * b.X + a.M11 * b.Y + a.M12 * b.Z + a.M13 * b.W,
+                a.M20 * b.X + a.M21 * b.Y + a.M22 * b.Z + a.M23 * b.W,
+                a.M30 * b.X + a.M31 * b.Y + a.M32 * b.Z + a.M33 * b.W
+            );
+        }
 
 
     }
+
+}
 }
 
 

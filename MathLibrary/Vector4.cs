@@ -11,7 +11,7 @@ namespace MathLibrary
         private float _x;
         private float _y;
         private float _z;
-
+        private float _w;
         public float X
         {
             get { return _x; }
@@ -27,13 +27,30 @@ namespace MathLibrary
             get { return _z; }
             set { _z = value; }
         }
-
-        public Vector4(float x, float y, float z)
+        public float W
+        {
+            get { return _w; }
+            set { _w = value; }
+        }
+        public Vector4(float x, float y, float z, float w)
         {
             _x = x;
             _y = y;
             _z = z;
+            _w = w;
         }
+        public static Vector4 CrossProduct(Vector4 a, Vector4 b)
+        {
+            float resultX = a.Y * b.Z - a.Z * b.Y;
+            float resultY = a.Z * b.X - a.X * b.Z;
+            float resultZ = a.X * b.Y - a.Y * b.X;
+
+            return new Vector4(resultX, resultY, resultZ);
+        }
+        public Vector4(float v1, float v2, float v3) : this()
+        {
+        }
+
         public float GetMagnitude()
         {
 

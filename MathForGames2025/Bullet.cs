@@ -14,6 +14,8 @@ namespace MathForGames2025
         private Actor _owner;
         private Vector2 _velocity;
         private float _damage;
+        private float _despawnTime = 1.0f;
+        private float _currentTime;
 
         public Bullet(string spritePath, Vector2 position, Actor owner, Vector2 velocity) : base(spritePath, position)
         {

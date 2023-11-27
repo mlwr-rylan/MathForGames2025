@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace MathForGames2025
+namespace MathLibrary
 {
     public struct Matrix3
     {
@@ -94,7 +94,8 @@ namespace MathForGames2025
                 (a.M20 * b.M02) + (a.M21 * b.M12) + (a.M22 * b.M22)
             );
         }
-
-
+        
     }
+
 }
+

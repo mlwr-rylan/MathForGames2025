@@ -14,7 +14,7 @@ namespace MathForGames2025
     {
         private const int _screenWidth = 800;
         private const int _screenHeight = 450;
-
+        private static Actor[] _actorsToRemove = new Actor[0];
         public static int Width
         {
             get { return _screenWidth; }
@@ -73,7 +73,7 @@ namespace MathForGames2025
         private void Update(float deltaTime)
         {
             _currentScene.Update(deltaTime);
-            
+            RemoveActorFromScene();
         }
 
         private void End()
@@ -89,7 +89,27 @@ namespace MathForGames2025
         public static Actor AddActorToScene(Actor actorToSpawn)
         {
             _currentScene.AddActor(actorToSpawn);
+
             return actorToSpawn;
+        }
+
+        //clears anything that needs to be removed after the following update
+        public static void RemoveActorFromScene(Actor actor)
+        {
+            if (_actorsToRemove == null)
+            {
+                _actorsToRemove = new Actor[0];
+            }
+            Actor[] temp = new Actor[_actorsToRemove.Length + 1];
+
+            for (int i = 0; i < _actorsToRemove.Length; i++)
+            {
+                temp[i] = _actorsToRemove[i];
+            }
+
+            temp[_actorsToRemove.Length] = actor;
+
+            _actorsToRemove = temp;
         }
         public void Run()
         {

@@ -49,9 +49,16 @@ namespace MathLibrary
             {
                 return (a - b).GetMagnitude();
             }
+            public static Vector3 CrossProduct(Vector3 a, Vector3 b)
+            {
+                float resultX = a.Y * b.Z - a.Z * b.Y;
+                float resultY = a.Z * b.X - a.X * b.Z;
+                float resultZ = a.X * b.Y - a.Y * b.X;
 
-            // makes vectors length one
-            public void Normalize(Vector3 direction)
+                return new Vector3(resultX, resultY, resultZ);
+            }
+        // makes vectors length one
+        public void Normalize(Vector3 direction)
             {
 
                 float magnitude = GetMagnitude();
