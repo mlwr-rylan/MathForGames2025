@@ -46,7 +46,7 @@ namespace MathForGames2025
         /// <param name="position">The position of the sprite on the screen.</param>
         public Actor(Sprite spritePath, Vector2 position)
         {
-            _sprite = new Sprite(spritePath);
+            _sprite = new Sprite("");
             LocalPosition = position;
         }
 

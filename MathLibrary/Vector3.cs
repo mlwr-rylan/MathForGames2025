@@ -57,22 +57,25 @@ namespace MathLibrary
                 return new Vector3(resultX, resultY, resultZ);
             }
         // makes vectors length one
-        public Vector3 Normalize()
+        public void Normalize()
         {
             float magnitude = GetMagnitude();
 
             if (magnitude == 0)
             {
-                //just incase its less than one
-                return new Vector3();
+                // To avoid division by zero, do nothing if the magnitude is zero
+                return;
             }
 
-            return new Vector3(X / magnitude, Y / magnitude, Z / magnitude);
+            // Normalize the vector in-place
+            X /= magnitude;
+            Y /= magnitude;
+            Z /= magnitude;
         }
+
         public Vector3 GetNormalized()
         {
             float magnitude = GetMagnitude();
-
             if (magnitude == 0)
             {
                 // Handle the case where the vector is already a zero vector or very close to it.
