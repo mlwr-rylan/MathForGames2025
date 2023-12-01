@@ -15,17 +15,17 @@ namespace MathForGames2025
         private float _distance;
         private float _angle;
         private Character _target;
-        
-        public Enemy(Character target, Icon icon, Vector2 position) : base( icon, position)
+        private Sprite _sprite;  // Add a Sprite property for the enemy's visual representation
+
+        public Enemy(Character target, string spritePath, Vector2 position) : base(spritePath,position)
         {
             _target = target;
+            _sprite = new Sprite(spritePath);
+          
+           
+
         }
-        //new
-        public Enemy(Character target, Icon icon, Vector2 position, float distance, float angle) : base(icon, position)
-        {
-            _distance = distance;
-            _angle = angle;
-        }
+
         //detection 
         public override void Update(float deltaTime)
         {
@@ -40,9 +40,9 @@ namespace MathForGames2025
 
             float dotProduct = Vector2.DotProduct(direction, Facing);
             //make the enemy yellow when facing me and make him red when im in his view .
-            Icon newIcon = ActorIcon;
+            //Icon newIcon = ActorIcon;
 
-            newIcon.IconColor = Color.YELLOW;
+            //newIcon.IconColor = Color.YELLOW;
                 
 
             if(dotProduct <= 0)
@@ -50,16 +50,22 @@ namespace MathForGames2025
                 return;
             }
 
-            newIcon.IconColor = Color.RED;
-            ActorIcon = newIcon;
+            //newIcon.IconColor = Color.RED;
+            //ActorIcon = newIcon;
             base.Update(deltaTime);
         }
-        public override void Draw()
+        public virtual void Draw()
         {
-            Vector2 endPosition = LocalPosition + (Facing * 3);
 
-            Raylib.DrawLine((int)LocalPosition.X, (int)LocalPosition.Y, (int)endPosition.X, (int)endPosition.Y, ActorIcon.IconColor);
-            base.Draw();
+            if (AttachedCollider != null)
+                AttachedCollider.Draw();
+            if (_sprite != null)
+            {
+                _sprite.Draw(GlobalTransforms);
+            }
         }
+
+
+
     }
 }

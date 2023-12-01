@@ -56,12 +56,16 @@ namespace MathForGames2025
                 _texture = Raylib.LoadTexture(path);
             }
 
-            /// <summary>
-            /// Draws the sprite using the rotation, translation, and scale
-            /// of the given transform
-            /// </summary>
-            /// <param name="transform">The transform matrix attached to the actor that owns this sprite.</param>
-            public void Draw(Matrix3 transform)
+        public Sprite(Sprite spritePath)
+        {
+        }
+
+        /// <summary>
+        /// Draws the sprite using the rotation, translation, and scale
+        /// of the given transform
+        /// </summary>
+        /// <param name="transform">The transform matrix attached to the actor that owns this sprite.</param>
+        public void Draw(Matrix3 transform)
             {
                 //Finds the scale of the sprite
                 float xMagnitude = (float)Math.Round(new Vector2(transform.M00, transform.M10).GetMagnitude());
@@ -84,6 +88,7 @@ namespace MathForGames2025
                     (float)(rotation * 180.0f / Math.PI), 1, Color.WHITE);
 
             }
+            
         }
     
 }

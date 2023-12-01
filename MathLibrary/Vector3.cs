@@ -36,12 +36,11 @@ namespace MathLibrary
                 _y = y;
                 _z = z;
             }
-            public float GetMagnitude()
-            {
-
-                return (float)MathF.Sqrt(X * X + Y * Y + Z * Z);
-            }
-            public static float DotProduct(Vector3 a, Vector3 b)
+        public float GetMagnitude()
+        {
+            return (float)MathF.Sqrt(X * X + Y * Y + Z * Z );
+        }
+        public static float DotProduct(Vector3 a, Vector3 b)
             {
                 return (float)a.X * b.X + a.Y * b.Y + a.Z * b.Z;
             }
@@ -58,36 +57,35 @@ namespace MathLibrary
                 return new Vector3(resultX, resultY, resultZ);
             }
         // makes vectors length one
-        public void Normalize(Vector3 direction)
+        public Vector3 Normalize()
+        {
+            float magnitude = GetMagnitude();
+
+            if (magnitude == 0)
             {
-
-                float magnitude = GetMagnitude();
-
-                if (magnitude == 0)
-                {
-                    return;
-                }
-                X /= magnitude;
-                Y /= magnitude;
-                Z /= magnitude;
-                // velocity.Normalize() - will change velocity to be a unit vector.
-                // velocity.GetNormalized() - will return a new normalized vector without changing velocity.
+                //just incase its less than one
+                return new Vector3();
             }
-            //divide the vector by its magnitude to get a value of 1
-            public Vector3 GetNormalized()
+
+            return new Vector3(X / magnitude, Y / magnitude, Z / magnitude);
+        }
+        public Vector3 GetNormalized()
+        {
+            float magnitude = GetMagnitude();
+
+            if (magnitude == 0)
             {
-                float magnitude = GetMagnitude();
-
-                if (magnitude == 0)
-                {
-                    return new Vector3();
-                }
-                return new Vector3(X / magnitude, Y / magnitude, Z/ magnitude);
-
-
-
+                // Handle the case where the vector is already a zero vector or very close to it.
+                return new Vector3();
             }
-            public static Vector3 operator +(Vector3 lhs, Vector3 rhs)
+
+            return new Vector3(X / magnitude, Y / magnitude, Z / magnitude);
+        }
+
+
+        //divide the vector by its magnitude to get a value of 1
+
+        public static Vector3 operator +(Vector3 lhs, Vector3 rhs)
             {
                 return new Vector3(lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z);
             }

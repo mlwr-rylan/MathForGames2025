@@ -94,7 +94,15 @@ namespace MathLibrary
                 (a.M20 * b.M02) + (a.M21 * b.M12) + (a.M22 * b.M22)
             );
         }
-        
+        public static Vector3 operator *(Matrix3 a, Vector3 b)
+        {
+            return new Vector3(
+                (a.M00 * b.X) + (a.M01 * b.Y) + (a.M02 * b.Z),
+                (a.M10 * b.X) + (a.M11 * b.Y) + (a.M12 * b.Z),
+                (a.M20 * b.X) + (a.M21 * b.Y) + (a.M22 * b.Z)
+            );
+        }
+
     }
 
 }

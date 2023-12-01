@@ -29,7 +29,7 @@ namespace MathForGames2025
 
     internal class Actor
     {
-        private Icon _icon;
+       
         private Sprite _sprite;
         private Actor _parent;
 
@@ -41,20 +41,18 @@ namespace MathForGames2025
         private Matrix3 _globalTransform = Matrix3.Identity;
         private Collider _collider;
         private bool _started;
-        public Actor(Icon icon, Vector2 position)
-        {
-            _icon = icon;
-            LocalPosition = position;
 
-        }
         /// <param name="spritePath">The path the sprite will be at in the build. Ex: "Images/player.png"</param>
         /// <param name="position">The position of the sprite on the screen.</param>
-        public Actor(string spritePath, Vector2 position)
+        public Actor(Sprite spritePath, Vector2 position)
         {
             _sprite = new Sprite(spritePath);
             LocalPosition = position;
         }
 
+        public Actor(string spritePath, Vector2 position)
+        {
+        }
 
         public Vector2 WorldPosition
         {
@@ -103,30 +101,24 @@ namespace MathForGames2025
         {
             get
             {
-                //Returns a new vector that represents the length of the x axis and the length of the y axis
+                // Returns a new vector representing the scaling factors along the x and y axes.
                 return new Vector2(_scale.M00, _scale.M11);
             }
             set
             {
-                //Set the scale matrix values to be the values given.
+                // Set the scale matrix values to be the scaling factors given.
                 _scale.M00 = value.X;
                 _scale.M11 = value.Y;
             }
         }
-        public Icon ActorIcon
-        {
-            get { return _icon; }
-            set { _icon = value; }
-        }
+
+
         public Collider AttachedCollider
         {
             get { return _collider; }
             set { _collider = value; }
         }
-        public Icon GetIcon()
-        {
-            return _icon;
-        }
+
         public bool Started
         {
             get { return _started; }
@@ -163,7 +155,6 @@ namespace MathForGames2025
 
         public virtual void Draw()
         {
-            Engine.Render(_icon, LocalPosition);
 
             if (AttachedCollider != null)
                 AttachedCollider.Draw();

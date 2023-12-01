@@ -6,10 +6,10 @@ using MathLibrary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-
+  
 namespace MathForGames2025
 {
-
+  
     internal class Engine
     {
         private const int _screenWidth = 800;
@@ -54,12 +54,7 @@ namespace MathForGames2025
         {
             return _currentScene;
         }
-        public static void Render(Icon icon, Vector2 position)
-        {
-            Raylib.DrawText(icon.Symbol,  (int)position.X, (int)position.Y, 50,  icon.IconColor);
-
-        }
-        
+       
         private void Draw()
         {
             Raylib.BeginDrawing();
@@ -73,7 +68,7 @@ namespace MathForGames2025
         private void Update(float deltaTime)
         {
             _currentScene.Update(deltaTime);
-            RemoveActorFromScene();
+            //RemoveActorFromScene();
         }
 
         private void End()
@@ -114,13 +109,13 @@ namespace MathForGames2025
         public void Run()
         {
             Vector2 test = new Vector2(8, 5);
-    
+           
             float magnitude = test.GetMagnitude();
             
             Start();
 
             
-            
+
             float currentTime = 0;
             float lastTime = 0;
             float deltaTime = 0;

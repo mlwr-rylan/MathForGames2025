@@ -41,20 +41,18 @@ namespace MathLibrary
         }
         public static Vector4 CrossProduct(Vector4 a, Vector4 b)
         {
-            float resultX = a.Y * b.Z - a.Z * b.Y;
-            float resultY = a.Z * b.X - a.X * b.Z;
-            float resultZ = a.X * b.Y - a.Y * b.X;
+            
+            float X = a.Y * b.Z - a.Z * b.Y;
+            float Y = a.Z * b.X - a.X * b.Z;
+            float Z = a.X * b.Y - a.Y * b.X;
+            float W = 0; 
 
-            return new Vector4(resultX, resultY, resultZ);
-        }
-        public Vector4(float v1, float v2, float v3) : this()
-        {
+            return new Vector4(X, Y, Z, W);
         }
 
         public float GetMagnitude()
         {
-
-            return (float)MathF.Sqrt(X * X + Y * Y + Z * Z);
+            return (float)MathF.Sqrt(X * X + Y * Y + Z * Z + W * W);
         }
         public static float DotProduct(Vector4 a, Vector4 b)
         {
@@ -65,22 +63,27 @@ namespace MathLibrary
             return (a - b).GetMagnitude();
         }
 
-        // makes vectors length one
-        public void Normalize(Vector4 direction)
-        {
 
-            float magnitude = GetMagnitude();
-
-            if (magnitude == 0)
+            public void Normalize()
             {
-                return;
+                float magnitude = GetMagnitude();
+
+                if (magnitude == 0)
+                {
+                    // Handle the case where the vector is already a zero vector or very close to it.
+                    // You might want to throw an exception, log a warning, or handle it in some way that makes sense for your application.
+                    return;
+                }
+
+                X /= magnitude;
+                Y /= magnitude;
+                Z /= magnitude;
+                W /= magnitude;
             }
-            X /= magnitude;
-            Y /= magnitude;
-            Z /= magnitude;
-            // velocity.Normalize() - will change velocity to be a unit vector.
-            // velocity.GetNormalized() - will return a new normalized vector without changing velocity.
-        }
+
+
+        
+
         //divide the vector by its magnitude to get a value of 1
         public Vector4 GetNormalized()
         {
@@ -88,32 +91,37 @@ namespace MathLibrary
 
             if (magnitude == 0)
             {
+                // Handle the case where the vector is already a zero vector or very close to it.
                 return new Vector4();
             }
-            return new Vector4(X / magnitude, Y / magnitude, Z / magnitude);
 
-
-
+            return new Vector4(X / magnitude, Y / magnitude, Z / magnitude, W / magnitude);
         }
+
+
         public static Vector4 operator +(Vector4 lhs, Vector4 rhs)
         {
-            return new Vector4(lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z);
+            return new Vector4(lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z, lhs.W + rhs.W);
         }
         public static Vector4 operator -(Vector4 lhs, Vector4 rhs)
         {
-            return new Vector4(lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z);
+            return new Vector4(lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z, lhs.W - rhs.W);
         }
         public static Vector4 operator *(Vector4 lhs, float Scalar)
         {
-            return new Vector4(lhs.X * Scalar, lhs.Y * Scalar, lhs.Z * Scalar);
+            return new Vector4(lhs.X * Scalar, lhs.Y * Scalar, lhs.Z * Scalar, lhs.W * Scalar);
         }
         public static Vector4 operator /(Vector4 lhs, Vector4 rhs)
         {
-            return new Vector4(lhs.X / rhs.X, lhs.Y / rhs.Y, lhs.Z / rhs.Z);
+            return new Vector4(lhs.X / rhs.X, lhs.Y / rhs.Y, lhs.Z / rhs.Z, lhs.W / rhs.W );
         }
         public static Vector4 operator *(float Scalar, Vector4 lhs)
         {
-            return new Vector4(lhs.X * Scalar, lhs.Y * Scalar, lhs.Z * Scalar);
+            return new Vector4(lhs.X * Scalar, lhs.Y * Scalar, lhs.Z * Scalar, lhs.W * Scalar);
+        }
+        public static Vector4 operator +(Vector4 vector, float scalar)
+        {
+            return new Vector4(vector.X + scalar, vector.Y + scalar, vector.Z + scalar, vector.W + scalar);
         }
 
 

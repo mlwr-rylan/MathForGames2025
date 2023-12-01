@@ -51,12 +51,13 @@ namespace MathLibrary
         }
         public static Vector4 CrossProduct(Vector4 a, Vector4 b)
         {
-            float resultX = a.Y * b.Z - a.Z * b.Y;
-            float resultY = a.Z * b.X - a.X * b.Z;
-            float resultZ = a.X * b.Y - a.Y * b.X;
+            float X = a.Y * b.Z - a.Z * b.Y;
+            float Y = a.Z * b.X - a.X * b.Z;
+            float Z = a.X * b.Y - a.Y * b.X;
 
-            return new Vector4(resultX, resultY, resultZ);
+            return new Vector4(X, Y, Z, 0);
         }
+
         public static Matrix4 CreateRotationX(float radians)
         {
             float cos = (float)Math.Cos(radians);
@@ -168,13 +169,13 @@ namespace MathLibrary
 
         }
         
-        public static Matrix4 operator *(Matrix4 a, Vector4 b)
+        public static Vector4 operator *(Matrix4 a, Vector4 b)
         {
-            return new Matrix4(
-                a.M00 * b.X + a.M01 * b.Y + a.M02 * b.Z + a.M03 * b.W,
-                a.M10 * b.X + a.M11 * b.Y + a.M12 * b.Z + a.M13 * b.W,
-                a.M20 * b.X + a.M21 * b.Y + a.M22 * b.Z + a.M23 * b.W,
-                a.M30 * b.X + a.M31 * b.Y + a.M32 * b.Z + a.M33 * b.W
+            return new Vector4(
+                (a.M00 * b.X) + (a.M01 * b.Y) + (a.M02 * b.Z) + (a.M03 * b.W),
+                (a.M10 * b.X) + (a.M11 * b.Y) + (a.M12 * b.Z) + (a.M13 * b.W),
+                (a.M20 * b.X) + (a.M21 * b.Y) + (a.M22 * b.Z) + (a.M23 * b.W),
+                (a.M30 * b.X) + (a.M31 * b.Y) + (a.M32 * b.Z) + (a.M33 * b.W)
             );
         }
 
@@ -182,7 +183,7 @@ namespace MathLibrary
     }
 
 }
-}
+
 
 
 

@@ -15,20 +15,25 @@ namespace MathForGames2025
     {
         private float _speed = 100.0f; // Default speed
         private Vector2 Velocity; // Define Velocity as a class member
-        private ProjectileSpawner _spawner;
-        public Player(Icon icon, Vector2 position) : base(icon, position) { }
+        //private ProjectileSpawner _spawner;
+        private Sprite _sprite;
 
         public Player(string spritePath, Vector2 position) : base(spritePath, position)
         {
-            _spawner = new ProjectileSpawner(this, new Vector2(0, 0), 50, "Images/bullet.png");
+            _sprite = new Sprite(spritePath);
         }
+
+        //public Player(string spritePath, Vector2 position) : base(spritePath, position)
+        //{
+        //    _spawner = new ProjectileSpawner(this, new Vector2(0, 0), 50, "Images/bullet.png");
+        //}
 
         public override void Update(float deltaTime)
         {
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
-            {
-                _spawner 
-            }
+            //if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
+            //{
+            //    _spawner 
+            //}
             PlayerMovement(deltaTime);
             // Update the player's position using the velocity
             LocalPosition += Velocity * deltaTime;
@@ -53,19 +58,27 @@ namespace MathForGames2025
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
                 direction += new Vector2(1, 0);
-            }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT_SHIFT))
+            }               
+            // Handle rotation based on user input
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
             {
-                _speed = 200f; // Sprinting speed
+                SetRotate(1.0f); // Rotate to the left
             }
-            else
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
             {
-                _speed = 100f; // Default speed
+                SetRotate(-1.0f); // Rotate to the right
             }
-
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+            {
+                SetScale(1.0f,0f);
+            }
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+            {
+                SetScale(-1.0f, 0);
+            }
             // Normalize the direction to ensure consistent speed in all directions
             Velocity = direction.GetNormalized() * _speed;
-
+            
             // Wrap the player around the screen instead of resetting position
             if (WorldPosition.X > Engine.Width)
             {

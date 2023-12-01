@@ -17,10 +17,7 @@ namespace MathForGames2025
             get { return _velocity; }
             set { _velocity = value;  }
         }
-        public Character (Icon icon, Vector2 position ) : base(icon, position)
-        {
 
-        }
         public Character(string spritePath, Vector2 position) : base(spritePath, position)
         {
 
